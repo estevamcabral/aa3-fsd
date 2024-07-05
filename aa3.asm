@@ -78,7 +78,7 @@ loop:
 	blt	$t1, $t0, loop		# Compara iterador ($t1) com tamanhoVetor ($t0) para gerar o loop
 	
 multiplicacao:
-	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva
+	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva na memoria
 	sw	$t8, MS
 	
 fim: j fim
@@ -86,8 +86,8 @@ fim: j fim
 .data
 tamanhoVetor:   .word 8		
 iterador: 	.word 0		
-A: 		.word 11 2 3 4 5 6 7 8	
-B: 		.word 9 10 11 12 13 14 15 16	
+A: 		.word -10 -20 30 40 50 60 70 80	
+B: 		.word  -5 40 100 20 15 -30 5 8	
 C: 		.word 0 0 0 0 0 0 0 0	
 D: 		.word 0 0 0 0 0 0 0 0
 somaPositivosC: .word 0
