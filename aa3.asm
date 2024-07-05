@@ -38,64 +38,51 @@ inicio:
 	lw $t7, 0($t7)
 	
 	la $t8, MS
-	la $t8, 0($t8)
+	lw $t8, 0($t8)
+	
 loop:
-	# Loop que percorre at√© o fim do vetor
-
 	lw	$s0, 0($t2) 		# A
 	lw	$s1, 0($t3) 		# B
-
+	
+	somaVetor:
 	add	$s0, $s0, $s1		# Guarda no s0 (A): A+B
-	sw	$s0  ($t4)		# Guarda no C ($t4): $s0 que cont√©m o resultado de A+B
+	sw	$s0  ($t4)		# Guarda no C ($t4): $s0 que contÈm o resultado de A+B
 	
-	blt	$s0, $zero, pulaSomaC	# Se n√∫mero for negativo, n√£o √© adicionado ele na soma total de C
+	blt	$s0, $zero, pulaSomaC	# Se n˙mero for negativo, n„o È adicionado ele na soma total de C
 	
-	# Soma e salva sequencialmente
-	
-	add	$t6, $t6, $s0
+	acumulaPositivosC:
+	add	$t6, $t6, $s0		# Soma e salva sequencialmente
 	sw	$t6, somaPositivosC
 	
 	pulaSomaC:
-	
 	lw	$s0, 0($t2) 		# A
 	lw	$s1, 0($t3) 		# B
 	
+	subtraiVetor:
 	sub	$s0, $s0, $s1		# Guarda no s0 (A): A-B
-	sw	$s0 ($t5)		# Guarda no D ($t5): $s0 que cont√©m o resultado de A-B
+	sw	$s0 ($t5)		# Guarda no D ($t5): $s0 que contÈm o resultado de A-B
 
-	blt	$s0, $zero, pulaSomaD	# Se n√∫mero for negativo, n√£o √© adicionado ele na soma total de D
+	blt	$s0, $zero, pulaSomaD	# Se n˙mero for negativo, n„o È adicionado ele na soma total de D
 	
-	# Soma e salva sequencialmente
-	
-	add	$t7, $t7, $s0
+	acumulaPositivosD:		
+	add	$t7, $t7, $s0		# Soma e salva sequencialmente
 	sw	$t7, somaPositivosD
-	
-	pulaSomaD:
 
-	# Adi√ß√£o de endere√ßos
+	pulaSomaD:	
+	addi 	$t2, $t2, 4		# AdiÁ„o de endereÁos
+	addi 	$t3, $t3, 4
+	addi 	$t4, $t4, 4
+	addi 	$t5, $t5, 4
+	addi 	$t1, $t1, 1		# AdiÁ„o do iterador
 	
-	addi $t2, $t2, 4
-	addi $t3, $t3, 4
-	addi $t4, $t4, 4
-	addi $t5, $t5, 4
-
-	# Adi√ß√£o do iterador
-	
-	addi	$t1, $t1, 1
-
-	# Compara iterador ($t1) com tamanhoVetor ($t0) para gerar o loop
-	
-	blt 	$t1, $t0, loop
+	blt	$t1, $t0, loop		# Compara iterador ($t1) com tamanhoVetor ($t0) para gerar o loop
 	
 multiplicacao:
-	# Sub-rotina que realiza a multiplica√ß√£o final e salva
-	mul	$t8, $t6, $t7
+	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicaÁ„o final e salva
 	sw	$t8, MS
-
-fim: 
-	j fim
-
 	
+fim: j fim
+
 .data
 tamanhoVetor:   .word 8		
 iterador: 	.word 0		
@@ -105,4 +92,4 @@ C: 		.word 0 0 0 0 0 0 0 0
 D: 		.word 0 0 0 0 0 0 0 0
 somaPositivosC: .word 0
 somaPositivosD: .word 0
-MS:		.word 0		
+MS:		.word 0
