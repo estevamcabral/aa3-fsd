@@ -37,7 +37,7 @@ inicio:
 	la $t7, somaPositivosD
 	lw $t7, 0($t7)
 	
-	la $t8, MS
+	la $t8, MP
 	lw $t8, 0($t8)
 	
 loop:
@@ -79,7 +79,7 @@ loop:
 	
 multiplicacao:
 	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva na memoria
-	sw	$t8, MS
+	sw	$t8, MP
 	
 fim: j fim
 
@@ -92,4 +92,4 @@ C: 		.word 0 0 0 0 0 0 0 0
 D: 		.word 0 0 0 0 0 0 0 0
 somaPositivosC: .word 0
 somaPositivosD: .word 0
-MS:		.word 0
+MP:		.word 0
