@@ -48,7 +48,7 @@ loop:
 	blt	$s0, $zero, pulaSomaC	# Se número for negativo, não é adicionado ele na soma total de C
 	
 	jal acumulaPositivosC
-	
+								
 	pulaSomaC:
 	
 	lw	$s0, 0($t2) 		# A
