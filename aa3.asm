@@ -1,4 +1,3 @@
-
 .text
 .globl inicio
 
@@ -44,31 +43,25 @@ loop:
 	lw	$s0, 0($t2) 		# A
 	lw	$s1, 0($t3) 		# B
 	
-	somaVetor:
-	add	$s0, $s0, $s1		# Guarda no s0 (A): A+B
-	sw	$s0  ($t4)		# Guarda no C ($t4): $s0 que contém o resultado de A+B
+	jal somaVetor
 	
 	blt	$s0, $zero, pulaSomaC	# Se número for negativo, não é adicionado ele na soma total de C
 	
-	acumulaPositivosC:
-	add	$t6, $t6, $s0		# Soma e salva sequencialmente
-	sw	$t6, somaPositivosC
+	jal acumulaPositivosC
 	
 	pulaSomaC:
+	
 	lw	$s0, 0($t2) 		# A
 	lw	$s1, 0($t3) 		# B
 	
-	subtraiVetor:
-	sub	$s0, $s0, $s1		# Guarda no s0 (A): A-B
-	sw	$s0 ($t5)		# Guarda no D ($t5): $s0 que contém o resultado de A-B
-
+	jal subtraiVetor
+	
 	blt	$s0, $zero, pulaSomaD	# Se número for negativo, não é adicionado ele na soma total de D
 	
-	acumulaPositivosD:		
-	add	$t7, $t7, $s0		# Soma e salva sequencialmente
-	sw	$t7, somaPositivosD
-
-	pulaSomaD:	
+	jal acumulaPositivosD
+	
+	pulaSomaD:
+	
 	addi 	$t2, $t2, 4		# Adição de endereços
 	addi 	$t3, $t3, 4
 	addi 	$t4, $t4, 4
@@ -77,12 +70,35 @@ loop:
 	
 	blt	$t1, $t0, loop		# Compara iterador ($t1) com tamanhoVetor ($t0) para gerar o loop
 	
-multiplicacao:
-	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva na memoria
-	sw	$t8, MP
+	jal multiplicacao
 	
 fim: j fim
 
+	somaVetor:
+	add	$s0, $s0, $s1		# Guarda no s0 (A): A+B
+	sw	$s0  ($t4)		# Guarda no C ($t4): $s0 que contém o resultado de A+B
+	jr	$ra
+	
+	subtraiVetor:
+	sub	$s0, $s0, $s1		# Guarda no s0 (A): A-B
+	sw	$s0 ($t5)		# Guarda no D ($t5): $s0 que contém o resultado de A-B
+	jr	$ra
+	
+	acumulaPositivosC:
+	add	$t6, $t6, $s0		# Soma e salva sequencialmente
+	sw	$t6, somaPositivosC
+	jr	$ra
+	
+	acumulaPositivosD:	
+	add	$t7, $t7, $s0		# Soma e salva sequencialmente
+	sw	$t7, somaPositivosD
+	jr	$ra
+	
+	multiplicacao:
+	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva na memoria
+	sw	$t8, MP
+	jr	$ra
+	
 .data
 tamanhoVetor:   .word 8		
 iterador: 	.word 0		
