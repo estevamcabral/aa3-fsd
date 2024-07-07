@@ -1,65 +1,73 @@
-0x00400000  0x3c011001  lui $1,0x00001001     22   	la $t0, tamanhoVetor
+0x00400000  0x3c011001  lui $1,0x00001001     23   	la $t0, tamanhoVetor
 0x00400004  0x34280000  ori $8,$1,0x00000000       
-0x00400008  0x8d080000  lw $8,0x00000000($8)  23   	lw $t0, 0($t0)
-0x0040000c  0x3c011001  lui $1,0x00001001     25   	la $t1, iterador
+0x00400008  0x8d080000  lw $8,0x00000000($8)  24   	lw $t0, 0($t0)
+0x0040000c  0x3c011001  lui $1,0x00001001     26   	la $t1, iterador
 0x00400010  0x34290004  ori $9,$1,0x00000004       
-0x00400014  0x8d290000  lw $9,0x00000000($9)  26   	lw $t1, 0($t1)
-0x00400018  0x3c011001  lui $1,0x00001001     28   	la $t2, A
+0x00400014  0x8d290000  lw $9,0x00000000($9)  27   	lw $t1, 0($t1)
+0x00400018  0x3c011001  lui $1,0x00001001     29   	la $t2, A
 0x0040001c  0x342a0008  ori $10,$1,0x00000008      
-0x00400020  0x3c011001  lui $1,0x00001001     29   	la $t3, B
+0x00400020  0x3c011001  lui $1,0x00001001     30   	la $t3, B
 0x00400024  0x342b0028  ori $11,$1,0x00000028      
-0x00400028  0x3c011001  lui $1,0x00001001     30   	la $t4, C
+0x00400028  0x3c011001  lui $1,0x00001001     31   	la $t4, C
 0x0040002c  0x342c0048  ori $12,$1,0x00000048      
-0x00400030  0x3c011001  lui $1,0x00001001     31   	la $t5, D
+0x00400030  0x3c011001  lui $1,0x00001001     32   	la $t5, D
 0x00400034  0x342d0068  ori $13,$1,0x00000068      
-0x00400038  0x3c011001  lui $1,0x00001001     33   	la $t6, somaPositivosC
+0x00400038  0x3c011001  lui $1,0x00001001     34   	la $t6, somaPositivosC
 0x0040003c  0x342e0088  ori $14,$1,0x00000088      
-0x00400040  0x8dce0000  lw $14,0x00000000($14)34   	lw $t6, 0($t6)
-0x00400044  0x3c011001  lui $1,0x00001001     36   	la $t7, somaPositivosD
+0x00400040  0x8dce0000  lw $14,0x00000000($14)35   	lw $t6, 0($t6)
+0x00400044  0x3c011001  lui $1,0x00001001     37   	la $t7, somaPositivosD
 0x00400048  0x342f008c  ori $15,$1,0x0000008c      
-0x0040004c  0x8def0000  lw $15,0x00000000($15)37   	lw $t7, 0($t7)
-0x00400050  0x3c011001  lui $1,0x00001001     39   	la $t8, MP
+0x0040004c  0x8def0000  lw $15,0x00000000($15)38   	lw $t7, 0($t7)
+0x00400050  0x3c011001  lui $1,0x00001001     40   	la $t8, MP
 0x00400054  0x34380090  ori $24,$1,0x00000090      
-0x00400058  0x8f180000  lw $24,0x00000000($24)40   	lw $t8, 0($t8)
-0x0040005c  0x8d500000  lw $16,0x00000000($10)43   	lw	$s0, 0($t2) 		# A
-0x00400060  0x8d710000  lw $17,0x00000000($11)44   	lw	$s1, 0($t3) 		# B
-0x00400064  0x0c10002c  jal 0x004000b0        46   	jal somaVetor
-0x00400068  0x0200082a  slt $1,$16,$0         48   	blt	$s0, $zero, pulaSomaC	# Se número for negativo, não é adicionado ele na soma total de C
+0x00400058  0x8f180000  lw $24,0x00000000($24)41   	lw $t8, 0($t8)
+0x0040005c  0x8d500000  lw $16,0x00000000($10)44   	lw	$s0, 0($t2) 		# Valor de A
+0x00400060  0x8d710000  lw $17,0x00000000($11)45   	lw	$s1, 0($t3) 		# Valor de B
+0x00400064  0x0c10002c  jal 0x004000b0        47   	jal somaVetor
+0x00400068  0x0200082a  slt $1,$16,$0         49   	blt	$s0, $zero, pulaSomaC	# Se número for negativo, não é adicionado ele na soma total de C
 0x0040006c  0x14200001  bne $1,$0,0x00000001       
-0x00400070  0x0c100032  jal 0x004000c8        50   	jal acumulaPositivosC
-0x00400074  0x8d500000  lw $16,0x00000000($10)54   	lw	$s0, 0($t2) 		# A
-0x00400078  0x8d710000  lw $17,0x00000000($11)55   	lw	$s1, 0($t3) 		# B
-0x0040007c  0x0c10002f  jal 0x004000bc        57   	jal subtraiVetor
-0x00400080  0x0200082a  slt $1,$16,$0         59   	blt	$s0, $zero, pulaSomaD	# Se número for negativo, não é adicionado ele na soma total de D
+0x00400070  0x0c100032  jal 0x004000c8        51   	jal acumulaPositivosC
+0x00400074  0x8d500000  lw $16,0x00000000($10)55   	lw	$s0, 0($t2) 		# Valor de A
+0x00400078  0x8d710000  lw $17,0x00000000($11)56   	lw	$s1, 0($t3) 		# Valor de B
+0x0040007c  0x0c10002f  jal 0x004000bc        58   	jal subtraiVetor
+0x00400080  0x0200082a  slt $1,$16,$0         60   	blt	$s0, $zero, pulaSomaD	# Se número for negativo, não é adicionado ele na soma total de D
 0x00400084  0x14200001  bne $1,$0,0x00000001       
-0x00400088  0x0c100036  jal 0x004000d8        61   	jal acumulaPositivosD
-0x0040008c  0x214a0004  addi $10,$10,0x000000065   	addi 	$t2, $t2, 4		# Adição de endereços
-0x00400090  0x216b0004  addi $11,$11,0x000000066   	addi 	$t3, $t3, 4
-0x00400094  0x218c0004  addi $12,$12,0x000000067   	addi 	$t4, $t4, 4
-0x00400098  0x21ad0004  addi $13,$13,0x000000068   	addi 	$t5, $t5, 4
-0x0040009c  0x21290001  addi $9,$9,0x00000001 69   	addi 	$t1, $t1, 1		# Adição do iterador
-0x004000a0  0x0128082a  slt $1,$9,$8          71   	blt	$t1, $t0, loop		# Compara iterador ($t1) com tamanhoVetor ($t0) para gerar o loop
+0x00400088  0x0c100036  jal 0x004000d8        62   	jal acumulaPositivosD
+0x0040008c  0x214a0004  addi $10,$10,0x000000066   	addi 	$t2, $t2, 4		# Adição de endereços
+0x00400090  0x216b0004  addi $11,$11,0x000000067   	addi 	$t3, $t3, 4
+0x00400094  0x218c0004  addi $12,$12,0x000000068   	addi 	$t4, $t4, 4
+0x00400098  0x21ad0004  addi $13,$13,0x000000069   	addi 	$t5, $t5, 4
+0x0040009c  0x21290001  addi $9,$9,0x00000001 70   	addi 	$t1, $t1, 1		# Adição do iterador
+0x004000a0  0x0128082a  slt $1,$9,$8          72   	blt	$t1, $t0, loop		# Compara iterador ($t1) com tamanhoVetor ($t0) para gerar o loop
 0x004000a4  0x1420ffed  bne $1,$0,0xffffffed       
-0x004000a8  0x0c10003a  jal 0x004000e8        73   	jal multiplicacao
-0x004000ac  0x0810002b  j 0x004000ac          75   fim: j fim
-0x004000b0  0x02118020  add $16,$16,$17       78   	add	$s0, $s0, $s1		# Guarda no s0 (A): A+B
-0x004000b4  0xad900000  sw $16,0x00000000($12)79   	sw	$s0  ($t4)		# Guarda no C ($t4): $s0 que contém o resultado de A+B
-0x004000b8  0x03e00008  jr $31                80   	jr	$ra
-0x004000bc  0x02118022  sub $16,$16,$17       83   	sub	$s0, $s0, $s1		# Guarda no s0 (A): A-B
-0x004000c0  0xadb00000  sw $16,0x00000000($13)84   	sw	$s0 ($t5)		# Guarda no D ($t5): $s0 que contém o resultado de A-B
-0x004000c4  0x03e00008  jr $31                85   	jr	$ra
-0x004000c8  0x01d07020  add $14,$14,$16       88   	add	$t6, $t6, $s0		# Soma e salva sequencialmente
-0x004000cc  0x3c011001  lui $1,0x00001001     89   	sw	$t6, somaPositivosC
+0x004000a8  0x0c10003a  jal 0x004000e8        74   	jal multiplicacao
+0x004000ac  0x0810002b  j 0x004000ac          76   fim: j fim
+0x004000b0  0x02118020  add $16,$16,$17       79   	add	$s0, $s0, $s1		# Guarda no s0 (A): A+B
+0x004000b4  0xad900000  sw $16,0x00000000($12)80   	sw	$s0  ($t4)		# Guarda no C ($t4): $s0 que contém o resultado de A+B
+0x004000b8  0x03e00008  jr $31                81   	jr	$ra
+0x004000bc  0x02118022  sub $16,$16,$17       84   	sub	$s0, $s0, $s1		# Guarda no s0 (A): A-B
+0x004000c0  0xadb00000  sw $16,0x00000000($13)85   	sw	$s0 ($t5)		# Guarda no D ($t5): $s0 que contém o resultado de A-B
+0x004000c4  0x03e00008  jr $31                86   	jr	$ra
+0x004000c8  0x01d07020  add $14,$14,$16       89   	add	$t6, $t6, $s0		# Soma e salva sequencialmente
+0x004000cc  0x3c011001  lui $1,0x00001001     90   	sw	$t6, somaPositivosC
 0x004000d0  0xac2e0088  sw $14,0x00000088($1)      
-0x004000d4  0x03e00008  jr $31                90   	jr	$ra
-0x004000d8  0x01f07820  add $15,$15,$16       93   	add	$t7, $t7, $s0		# Soma e salva sequencialmente
-0x004000dc  0x3c011001  lui $1,0x00001001     94   	sw	$t7, somaPositivosD
+0x004000d4  0x03e00008  jr $31                91   	jr	$ra
+0x004000d8  0x01f07820  add $15,$15,$16       94   	add	$t7, $t7, $s0		# Soma e salva sequencialmente
+0x004000dc  0x3c011001  lui $1,0x00001001     95   	sw	$t7, somaPositivosD
 0x004000e0  0xac2f008c  sw $15,0x0000008c($1)      
-0x004000e4  0x03e00008  jr $31                95   	jr	$ra
-0x004000e8  0x71cfc002  mul $24,$14,$15       98   	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva na memoria
-0x004000ec  0x3c011001  lui $1,0x00001001     99   	sw	$t8, MP
-0x004000f0  0xac380090  sw $24,0x00000090($1)      
-0x004000f4  0x03e00008  jr $31                100  	jr	$ra
+0x004000e4  0x03e00008  jr $31                96   	jr	$ra
+0x004000e8  0x0339c826  xor $25,$25,$25       99   	xor	$t9, $t9, $t9		# Inicia em 0 e vai ate o valor de somaPositivosC
+0x004000ec  0x20010000  addi $1,$0,0x00000000 101  	beq	$t6, 0, pulaLoop	# Se somaPositivosC ou somaPositivosD forem zero pula	
+0x004000f0  0x102e0006  beq $1,$14,0x00000006      
+0x004000f4  0x20010000  addi $1,$0,0x00000000 102  	beq	$t7, 0, pulaLoop	
+0x004000f8  0x102f0004  beq $1,$15,0x00000004      
+0x004000fc  0x030fc020  add $24,$24,$15       105  	add	$t8, $t8, $t7		# Adiciona somaPositivosD em $t8
+0x00400100  0x23390001  addi $25,$25,0x0000000106  	addi	$t9, $t9, 1
+0x00400104  0x032e082a  slt $1,$25,$14        107  	blt	$t9, $t6, loopMult
+0x00400108  0x1420fffc  bne $1,$0,0xfffffffc       
+0x0040010c  0x3c011001  lui $1,0x00001001     110  	sw	$t8, MP			# Salva na memória 			
+0x00400110  0xac380090  sw $24,0x00000090($1)      
+0x00400114  0x03e00008  jr $31                111  	jr	$ra
 
 
 0x10010000    0x00000008 0x00000000 0xfffffff6 0xffffffec 0x0000001e 0x00000028 0x00000032 0x0000003c 

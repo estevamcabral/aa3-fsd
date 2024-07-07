@@ -14,6 +14,7 @@
 #t6 = somaPositivosC
 #t7 = somaPositivosD
 #t8 = MS
+#t9 = iterador do loopMult
 
 #s0 = Valor percorrido de A
 #s1 = Valor percorrido de B
@@ -40,8 +41,8 @@ inicio:
 	lw $t8, 0($t8)
 	
 loop:
-	lw	$s0, 0($t2) 		# A
-	lw	$s1, 0($t3) 		# B
+	lw	$s0, 0($t2) 		# Valor de A
+	lw	$s1, 0($t3) 		# Valor de B
 	
 	jal somaVetor
 	
@@ -51,8 +52,8 @@ loop:
 								
 	pulaSomaC:
 	
-	lw	$s0, 0($t2) 		# A
-	lw	$s1, 0($t3) 		# B
+	lw	$s0, 0($t2) 		# Valor de A
+	lw	$s1, 0($t3) 		# Valor de B
 	
 	jal subtraiVetor
 	
@@ -94,12 +95,23 @@ fim: j fim
 	sw	$t7, somaPositivosD
 	jr	$ra
 	
-	multiplicacao:
-	mul	$t8, $t6, $t7		# Sub-rotina que realiza a multiplicação final e salva na memoria
-	sw	$t8, MP
+	multiplicacao:			# Sub-rotina que realiza a multiplicação final e salva na memória utilizando algoritmo de somas sequenciais
+	xor	$t9, $t9, $t9		# Inicia em 0 e vai ate o valor de somaPositivosC
+	
+	beq	$t6, 0, pulaLoop	# Se somaPositivosC ou somaPositivosD forem zero pula	
+	beq	$t7, 0, pulaLoop	
+	
+	loopMult:
+	add	$t8, $t8, $t7		# Adiciona somaPositivosD em $t8
+	addi	$t9, $t9, 1
+	blt	$t9, $t6, loopMult
+	
+	pulaLoop:
+	sw	$t8, MP			# Salva na memória 			
 	jr	$ra
 	
-.data
+	
+.data  
 tamanhoVetor:   .word 8		
 iterador: 	.word 0		
 A: 		.word -10 -20 30 40 50 60 70 80	
